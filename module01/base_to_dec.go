@@ -9,5 +9,24 @@ package module01
 //   BaseToDec("1110", 2) => 14
 //
 func BaseToDec(value string, base int) int {
-	return 0
+	dict := "0123456789ABCDEF"
+
+	var result int
+	multiplier := 1
+
+	getNum := func(ch rune) int {
+		for index, c := range dict[0:base] {
+			if c == ch {
+				return index
+			}
+		}
+		return 0
+	}
+
+	for _, char := range Reverse(value) {
+		result += getNum(char) * multiplier
+		multiplier *= base
+	}
+
+	return result
 }
